@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aza Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sancreek&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --bg:        #0a0a0a;
+      --bg-card:   #111111;
+      --bg-hover:  #161616;
+      --border:    rgba(255,255,255,0.08);
+      --text:      #ffffff;
+      --muted:     rgba(255,255,255,0.38);
+      --subdued:   rgba(255,255,255,0.55);
+      --accent:    #00e5a0;
+      --accent-red:#d94f3b;
+      --font-sans: 'DM Sans', 'Inter', sans-serif;
+    }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+ 
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--border); }
+ 
+    .nav-logo {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+ 
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subdued);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+ 
+    .nav-inquire {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .nav-inquire:hover { color: var(--accent); }
+ 
+    /* ─── HERO ─── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 60px 60px;
+    }
+ 
+    .hero-layout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+    }
+ 
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 680px;
+    }
+ 
+    .hero-image-wrap { display: none; }
+    .hero-placeholder { display: none !important; }
+    .hero-image-label { display: none; }
+ 
+ 
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--accent);
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+ 
+    .hero-title {
+      font-size: clamp(72px, 10vw, 120px);
+      font-family: 'Sancreek', serif;
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      margin-bottom: 32px;
+    }
+ 
+    .hero-desc {
+      font-size: 15px;
+      color: var(--subdued);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 500px;
+      text-align: center;
+    }
+ 
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+ 
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+    .btn-primary:hover { background: #e0e0e0; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .btn-secondary:hover { background: var(--bg-hover); }
+ 
+    .btn-arrow { font-size: 16px; }
+ 
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      padding: 100px 60px;
+    }
+ 
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+ 
+    .section-title {
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+ 
+    /* ─── PORTFOLIO ─── */
+    #work { padding-top: 80px; }
+ 
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    .portfolio-header-note {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: right;
+      max-width: 240px;
+      line-height: 1.6;
+    }
+ 
+    .tab-bar {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+    .tab {
+      padding: 12px 0;
+      margin-right: 32px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      user-select: none;
+    }
+    .tab.active {
+      color: var(--text);
+      border-color: var(--text);
+    }
+    .tab .tag-18 {
+      font-size: 10px;
+      color: var(--muted);
+      margin-left: 5px;
+    }
+ 
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg-card);
+      aspect-ratio: 1 / 1;
+    }
+    .gallery-item img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, opacity 0.3s;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+ 
+    .gallery-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 14px 16px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .caption-title { font-size: 13px; font-weight: 400; color: var(--text); }
+    .caption-year  { font-size: 12px; color: var(--muted); }
+ 
+    /* placeholder gradient art */
+    .art-placeholder {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+ 
+    /* NSFW gate overlay */
+    .nsfw-panel {
+      display: none;
+    }
+    .nsfw-gate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      border: 1px solid var(--border);
+      gap: 16px;
+      text-align: center;
+      padding: 40px;
+    }
+    .nsfw-gate p { color: var(--muted); font-size: 14px; max-width: 340px; }
+    .nsfw-gate h3 { font-size: 22px; font-weight: 300; }
+ 
+    /* ─── COMMISSIONS ─── */
+    #commissions {
+      border-top: 1px solid var(--border);
+    }
+ 
+    .commissions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+ 
+    .comm-left .section-title { margin-bottom: 16px; }
+    .comm-open { color: var(--accent); }
+ 
+    .comm-desc {
+      font-size: 14px;
+      color: var(--subdued);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 440px;
+    }
+ 
+    .comm-card {
+      border: 1px solid var(--border);
+      padding: 32px;
+    }
+    .comm-card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .comm-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .comm-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--subdued);
+    }
+    .comm-list li::before {
+      content: '▪';
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+	.comm-image {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4096 / 3050;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+    }
+ 
+    .comm-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0.85);
+      transition: filter 0.4s;
+    }
+    .comm-image:hover img { filter: brightness(1); }
+ 
+    .comm-image-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .comm-image-placeholder span {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+ 
+    .wont-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .wont-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+ 
+    /* ─── TERMS ─── */
+    #terms {
+      border-top: 1px solid var(--border);
+    }
+ 
+    .terms-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+ 
+    .terms-left p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+ 
+    .accordion { display: flex; flex-direction: column; }
+ 
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .accordion-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+ 
+    .accordion-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: var(--font-sans);
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .accordion-toggle:hover { color: var(--accent); }
+ 
+    .accordion-icon {
+      font-size: 18px;
+      color: var(--muted);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .accordion-item.open .accordion-icon { transform: rotate(180deg); }
+ 
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+    }
+    .accordion-item.open .accordion-body {
+      max-height: 400px;
+      padding-bottom: 20px;
+    }
+    .accordion-body p {
+      font-size: 14px;
+      color: var(--subdued);
+      line-height: 1.75;
+    }
+ 
+    /* ─── CONTACT ─── */
+    #contact {
+      border-top: 1px solid var(--border);
+    }
+ 
+    .contact-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 52px;
+    }
+    .contact-note {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 240px;
+      text-align: right;
+      line-height: 1.65;
+    }
+ 
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+	  max width; 900px;
+	  margin: 0 auto;
+    }
+ 
+    .contact-card {
+      border: 1px solid var(--border);
+      padding: 24px;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .contact-card:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: var(--bg-hover);
+    }
+ 
+    .contact-card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+ 
+    .contact-arrow {
+      color: var(--muted);
+      font-size: 14px;
+    }
+ 
+    .contact-val {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .contact-icon {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+ 
+    /* ─── PATREON ─── */
+    #patreon {
+      padding: 60px;
+    }
+ 
+    .patreon-box {
+      border: 1px solid var(--border);
+      padding: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .patreon-box::after {
+      content: '';
+      position: absolute;
+      right: -100px; top: -100px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(180,40,40,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+ 
+    .patreon-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-bottom: 16px;
+    }
+ 
+    .patreon-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+    .patreon-title .dim { color: var(--muted); }
+ 
+    .patreon-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 20px;
+      max-width: 440px;
+    }
+ 
+    .patreon-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .patreon-price {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+ 
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+ 
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox-inner {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0.94);
+      transition: transform 0.25s ease;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    .lightbox.open .lightbox-inner {
+      transform: scale(1);
+    }
+	.lightbox-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70vw;       /* Reduced from 85vw to keep wide images more contained */
+      height: 55vh;      /* Reduced from 70vh to keep tall images from taking up too much screen */
+      max-width: 1200px; 
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Leave this part exactly as it is */
+    div#lightbox-content img,
+    div#lightbox-content svg {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      display: block !important;
+      object-fit: contain !important;
+      width: auto !important;
+      height: auto !important;
+      
+      /* FORCES THE IMAGE TO MAX OUT AT 50% OF THE VIEWPORT */
+      max-width: 75vw !important;  
+      max-height: 75vh !important; 
+    }
+    .lightbox-content img {
+      display: block;
+      /* Force the image to respect the container dimensions and scale down safely */
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Keep this from the previous fix to reset the placeholder overrides */
+    #lightbox-content .art-placeholder {
+      position: relative !important;
+      inset: auto !important;
+      width: auto !important;
+      height: auto !important;
+    }
+	
+    .lightbox-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+      z-index: 201;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-meta {
+      margin-top: 12px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+    .lightbox-meta span { font-size: 13px; color: var(--muted); }
+ 
+    /* ─── SOCIALS ─── */
+    #socials { border-top: 1px solid var(--border); }
+ 
+    .socials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+ 
+    .social-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .social-card:hover {
+      border-color: rgba(255,255,255,0.22);
+      background: var(--bg-hover);
+    }
+    .social-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .social-icon {
+      font-size: 18px;
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .social-name {
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .social-handle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .social-arrow {
+      font-size: 14px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+ 
+    @media (max-width: 900px) {
+      .socials-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .socials-grid { grid-template-columns: 1fr; }
+    }
+ 
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+ 
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #home { padding: 100px 24px 60px; }
+      .section { padding: 72px 24px; }
+      .commissions-grid,
+      .terms-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-cards { grid-template-columns: 1fr 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .patreon-box { flex-direction: column; padding: 36px; }
+      .patreon-right { text-align: left; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+      #patreon { padding: 24px; }
+      .portfolio-header { flex-direction: column; gap: 12px; }
+      .portfolio-header-note { text-align: left; }
+      .contact-header { flex-direction: column; gap: 12px; }
+      .contact-note { text-align: left; }
+    }
+    @media (max-width: 560px) {
+      .contact-cards { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+ 
+<!-- ──────────────── NAV ──────────────── -->
+<nav id="navbar">
+  <a class="nav-logo" href="#home">Aza Studio</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#commissions">Commissions</a></li>
+    <li><a href="#terms">Terms</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#patreon">Patreon</a></li>
+  </ul>
+  <button class="nav-inquire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Inquire</button>
+</nav>
+ 
+<!-- ──────────────── HERO ──────────────── -->
+<section id="home">
+  <div class="hero-layout">
+ 
+    <div class="hero-inner">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Commissions Open
+      </div>
+      <h1 class="hero-title">AZA<br>STUDIO</h1>
+      <p class="hero-desc">Illustration · Concept · Character art. Taking on a limited queue of personal &amp; character commissions. Read the terms, slide into the inbox.</p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary">Commission me <span class="btn-arrow">↗</span></a>
+        <a href="#work" class="btn btn-secondary">View work</a>
+      </div>
+    </div>
+ 
+ 
+ 
+  </div>
+</section>
+ 
+<!-- ──────────────── PORTFOLIO ──────────────── -->
+<section id="work" class="section">
+  <div class="portfolio-header">
+    <div>
+      <p class="section-eyebrow">01 — Portfolio</p>
+      <h2 class="section-title" style="margin-bottom:0">Selected work</h2>
+    </div>
+    <p class="portfolio-header-note">A small archive. Click any piece to view in full. NSFW section is age-gated.</p>
+  </div>
+ 
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab('sfw',this)">SFW</div>
+    <div class="tab" onclick="switchTab('nsfw',this)">NSFW <span class="tag-18">18+</span></div>
+  </div>
+ 
+  <!-- SFW Gallery -->
+  <div id="sfw-panel">
+    <div class="gallery">
+ 
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="goblin.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Goblin Slayer</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+ 
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="wings.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Nikka Wings(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+			
+		<div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="love2.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Chibi Love</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+	  
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="necro.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Nekro(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="lumire.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Lumire(OC)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="atlas.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Atlas(OC)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="Family.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Family(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="teto2.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Teto)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="nikka4.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Nikka(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="irina.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Irina (Artfight)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="nikkacute.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Chibi Nikka(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="Reze.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Reze</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="asta.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Asta</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+ 
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="love.jpg" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Love</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+	  <div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="nekro.jpg" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Nekro(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+		<div class="gallery-item" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="favicon.png" alt="Veil I" />
+        </img>
+        <div class="gallery-caption">
+          <span class="caption-title">Dark Nikka</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- NSFW Panel -->
+  <div id="nsfw-panel" class="nsfw-panel">
+
+    <!-- Age gate (shown first) -->
+    <div id="nsfw-gate" class="nsfw-gate">
+      <h3>Age-Gated Content</h3>
+      <p>This section contains mature (18+) artwork. By continuing you confirm you are 18 or older and consent to viewing adult content.</p>
+      <button class="btn btn-primary" onclick="unlockNSFW()">I am 18+ — Enter</button>
+    </div>
+
+    <!-- NSFW gallery (hidden until confirmed) -->
+    <div id="nsfw-gallery" style="display:none;">
+      <div class="gallery">
+
+        <!-- ── NSFW IMAGE 1 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="pomni.jpg" alt="Piece 1" />
+          <div class="gallery-caption">
+            <span class="caption-title">Pomni Anal</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <!-- ── NSFW IMAGE 2 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="Rebecca.jpg" alt="Piece 2" />
+          <div class="gallery-caption">
+            <span class="caption-title">Rebecca</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <!-- ── NSFW IMAGE 3 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="Dex.jpg" alt="Piece 3" />
+          <div class="gallery-caption">
+            <span class="caption-title">Dex(OC)</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <!-- ── NSFW IMAGE 4 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="Neru.jpg" alt="Piece 4" />
+          <div class="gallery-caption">
+            <span class="caption-title">Akita Neru</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <!-- ── NSFW IMAGE 5 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="mina.jpg" alt="Piece 5" />
+          <div class="gallery-caption">
+            <span class="caption-title">Mina (MHA)</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <!-- ── NSFW IMAGE 6 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="Cat.jpg" alt="Piece 6" />
+          <div class="gallery-caption">
+            <span class="caption-title">Catalyst</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <!-- ── NSFW IMAGE 7 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="Raven.jpg" alt="Piece 7" />
+          <div class="gallery-caption">
+            <span class="caption-title">Raven</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <!-- ── NSFW IMAGE 8 ── -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="kiara.jpg" alt="Piece 8" />
+          <div class="gallery-caption">
+            <span class="caption-title">Kiara JJK</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+		
+		<!-- ── NSFW IMAGE 9 ── -->
+		<div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="Jane.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Jane Doe</span>
+              <span class="caption-year">2026</span>
+            </div>
+          </div>
+		<!-- ── NSFW IMAGE 9 ── -->
+		<div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="Teto.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Kasane Teto</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+		<!-- ── NSFW IMAGE 9 ── -->
+		<div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="makima.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Makima Shower</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+		<!-- ── NSFW IMAGE 9 ── -->
+		<div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="Axle.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Axle Apex</span>
+              <span class="caption-year">2026</span>
+            </div>
+          </div>
+		  <!-- ── NSFW IMAGE 9 ── -->
+		<div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="kit.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Kit</span>
+              <span class="caption-year">2026</span>
+            </div>
+          </div>
+		  <!-- ── NSFW IMAGE 9 ── -->
+		<div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="teto3.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Teto and Pear</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+		  <div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="femboy.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Femboy cock</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+		  <div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="lucy.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Lucy</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+		  <div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="elf.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Frieran</span>
+              <span class="caption-year">2026</span>
+            </div>
+          </div>
+		  <div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="21.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Android 21</span>
+              <span class="caption-year">2026</span>
+            </div>
+          </div>
+		  <div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="axle2.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Axle Apex</span>
+              <span class="caption-year">2026</span>
+            </div>
+          </div>
+		  <div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="alien.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Alien Teto</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+        <!--
+          TO ADD MORE IMAGES: copy the block below and paste it here,
+          then change the src, alt, title and year.
+
+          <div class="gallery-item" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="YOUR-IMAGE.jpg" alt="Your Title" />
+            <div class="gallery-caption">
+              <span class="caption-title">Your Title</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+        -->
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+ 
+<!-- ──────────────── COMMISSIONS ──────────────── -->
+<section id="commissions" class="section">
+  <div class="commissions-grid">
+    <div class="comm-left">
+      <p class="section-eyebrow">02 — Status</p>
+      <h2 class="section-title">Commissions<br><span class="comm-open">are open.</span></h2>
+      <p class="comm-desc">Yes — really open. Slots are limited and filled on a first-come, first-served basis. Read the terms below before reaching out, then drop me a line with your reference and brief.</p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary">Get in touch <span class="btn-arrow">↗</span></a>
+        <a href="#terms" class="btn btn-secondary">Read the terms</a>
+      </div>
+    </div>
+	<div class="comm-image">
+	<img src="comms.jpg" alt="Commission preview"
+		onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+	<div class="comm-image-placeholder" style="display:none;">
+		<img width="40" height="40" viewBox="0 0 40 40" fill="none" src="comms.jpg">
+		<rect x="1" y="1" width="38" height="38" rx="2" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+		<path d="M8 28 L14 20 L20 26 L26 18 L32 28H8Z" fill="rgba(255,255,255,0.08)"/>
+		<circle cx="14" cy="14" r="4" fill="rgba(255,255,255,0.08)"/>
+		</img>
+		<span style="font-size:10px;color:rgba(255,255,255,0.2)">commission-preview.jpg</span>
+	</div>
+	</div>
+    <div class="comm-card">
+      <p class="comm-card-label">What I Take On</p>
+      <ul class="comm-list">
+        <li>Character portraits &amp; busts</li>
+        <li>Full illustrations</li>
+		<li>OC Designs</li>
+        <li>Suggestive / NSFW (18+ only)</li>
+        <li>Couples &amp; pairings</li>
+      </ul>
+      <p class="wont-label">I Will Not Draw</p>
+      <p class="wont-text">Loli/Shota (in any context), Real people in NSFW scenarios, Hate symbols, Revenge Porn, Logos, Thing outside of my artstyle (like for example Photorealism, Enviroments, Etc), Heavy fetishes like Scat, Inflation, Vore, or something that would make me uncomfortable, Exaggerated sized genitalia, Non consensual, AI generated references for commissions, anything else feel free to ask</p>     
+    </div>
+  </div>
+</section>
+ 
+<!-- ──────────────── TERMS ──────────────── -->
+<section id="terms" class="section">
+  <div class="terms-grid">
+    <div class="terms-left">
+      <p class="section-eyebrow">03 — Read Me</p>
+      <h2 class="section-title">Terms of<br>Service</h2>
+      <p>Payment is acknowledgment of these terms. If anything is unclear, ask before you commission.</p>
+    </div>
+ 
+    <div class="accordion">
+ 
+      <div class="accordion-item">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">
+          1. General
+          <span class="accordion-icon">⌄</span>
+        </button>
+        <div class="accordion-body">
+          <p>All comissions are for personal use only unless a commercial license is purchased, I reserve the right to decline a commission if I see it fit, Slots can be transferable only before payment, The illustrations i make will not be posted publicly unless I have permission of the commissioner</p>
+        </div>
+      </div>
+ 
+      <div class="accordion-item">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">
+          2. Payment/Process
+          <span class="accordion-icon">⌄</span>
+        </button>
+        <div class="accordion-body">
+          <p>Prices are listed in USD and will be paid via Paypal, The prices can be negotiable if it doesnt sound too unreasonable. Payments are made in two instances, the first half of the pay is done after we confirm the looks of the sketch, the second half of the pay is after i give you a preview of the work, once the full payment is done i will send a google drive file with the art itself, the save file, the timelapse, and the alts if the commission includes them</p>
+        </div>
+      </div>
+ 
+      <div class="accordion-item">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">
+          3. Refunds
+          <span class="accordion-icon">⌄</span>
+        </button>
+        <div class="accordion-body">
+          <p>Once a sketch is delivered, no refunds will be issued. If I am unable to complete your commission due to personal circumstances, a full refund will be provided.</p>
+        </div>
+      </div>
+ 
+      <div class="accordion-item">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">
+          4. Usage &amp; Rights
+          <span class="accordion-icon">⌄</span>
+        </button>
+        <div class="accordion-body">
+          <p>You may use the artwork for personal use, profile pictures, and non-commercial sharing with credit. Commercial use (merchandise, games, books) requires a commercial license discussed at time of commission. Do not remove my signature or claim the work as your own.</p>
+        </div>
+      </div>
+ 
+      <div class="accordion-item">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">
+          5. Will Draw / Won't Draw
+          <span class="accordion-icon">⌄</span>
+        </button>
+        <div class="accordion-body">
+          <p><strong style="color:var(--text)">Will draw:</strong> Illustrations, pinups, portraits, sfw/nsfw, OC's, sketches, linearts and full colors/renders.<br><br><strong style="color:var(--text)">Won't draw:</strong> Loli/Shota (in any context), Real people in NSFW scenarios, Hate symbols, Revenge Porn, Logos, Thing outside of my artstyle (like for example Photorealism, Enviroments, Etc), Heavy fetishes like Scat, Inflation, Vore, or something that would make me uncomfortable, Exaggerated sized genitalia, Non consensual, AI generated references for commissions, anything else feel free to ask</p>
+        </div>
+      </div>
+ 
+      <div class="accordion-item">
+        <button class="accordion-toggle" onclick="toggleAccordion(this)">
+          6. NSFW
+          <span class="accordion-icon">⌄</span>
+        </button>
+        <div class="accordion-body">
+          <p>NSFW commissions are available to verified adult (18+) clients only. By commissioning NSFW content you confirm you are 18 or over.</p>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- ──────────────── CONTACT ──────────────── -->
+<section id="contact" class="section">
+  <div class="contact-header">
+    <div>
+      <p class="section-eyebrow">04 — Reach Out</p>
+      <h2 class="section-title" style="margin-bottom:0">Contact &amp; Payment</h2>
+    </div>
+    <p class="contact-note">Discord is best for commission inquiries. PayPal for payment.</p>
+  </div>
+ 
+  <div class="contact-cards">
+ 
+ 
+    <a href="https://discord.gg/rvh2tM8h9e" class="contact-card">
+      <div class="contact-card-label">
+        DISCORD
+        <span class="contact-arrow">↗</span>
+      </div>
+      <div class="contact-val">
+        <span class="contact-icon">💬</span>
+        Contact me on Discord: 21aza
+      </div>
+    </a>
+ 
+    <a href="https://paypal.me/azzza19" class="contact-card" target="_blank" rel="noopener">
+      <div class="contact-card-label">
+        PAYPAL
+        <span class="contact-arrow">↗</span>
+      </div>
+      <div class="contact-val">
+        <span class="contact-icon">$</span>
+        paypal.me/azzza19
+      </div>
+    </a>
+ 
+    <a href="https://www.patreon.com/cw/Aza21" class="contact-card" target="_blank" rel="noopener">
+      <div class="contact-card-label">
+        PATREON
+        <span class="contact-arrow">↗</span>
+      </div>
+      <div class="contact-val">
+        <span class="contact-icon">♡</span>
+        patreon.com/Aza21
+      </div>
+    </a>
+ 
+  </div>
+</section>
+ 
+<!-- ──────────────── PATREON ──────────────── -->
+<section id="patreon" class="section" style="padding-top:0; padding-bottom: 0;">
+  <div class="patreon-box">
+    <div>
+      <p class="patreon-eyebrow">05 — Support me with my Patreon</p>
+      <h2 class="patreon-title">
+        Want more?<br>
+        <span class="dim">Join the Patreon.</span>
+      </h2>
+      <p class="patreon-desc">Early WIP, monthly process breakdowns, full-resolution downloads, NSFW alts, and first dibs on commission slots before they open publicly.</p>
+    </div>
+    <div class="patreon-right">
+      <a href="https://www.patreon.com/cw/Aza21" target="_blank" rel="noopener" class="btn btn-primary">
+        <span>♡</span> Become a patron <span class="btn-arrow">↗</span>
+      </a>
+      <p class="patreon-price">From $1.50 to $5usd/ month</p>
+    </div>
+  </div>
+</section>
+ 
+ <!-- ──────────────── SOCIALS ──────────────── -->
+<section id="socials" class="section">
+  <p class="section-eyebrow">06 — Find Me</p>
+  <h2 class="section-title" style="margin-bottom:0">Socials &amp; Links</h2>
+
+  <div class="socials-grid">
+
+    <!-- Twitter / X -->
+    <a href="https://x.com/Aza19OG" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">𝕏</span>
+        <div>
+          <div class="social-name">Twitter</div>
+          <div class="social-handle">@Aza19OG</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- DeviantArt -->
+    <a href="https://www.deviantart.com/azzza19art" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">🎨</span>
+        <div>
+          <div class="social-name">DeviantArt</div>
+          <div class="social-handle">Azzza19art</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- BlueSky -->
+    <a href="https://bsky.app/profile/19aza.bsky.social" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">🦋</span>
+        <div>
+          <div class="social-name">BlueSky</div>
+          <div class="social-handle">19aza.bsky.social</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- Reddit -->
+    <a href="https://www.reddit.com/user/TotallyNotAza/?sort=new" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">👾</span>
+        <div>
+          <div class="social-name">Reddit</div>
+          <div class="social-handle">u/TotallyNotAza</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- NewGrounds -->
+    <a href="https://azza19art.newgrounds.com" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">🎮</span>
+        <div>
+          <div class="social-name">NewGrounds</div>
+          <div class="social-handle">Azza19art</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- Rule 34 -->
+    <a href="https://rule34.xxx/index.php?page=post&s=list&tags=aza19" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">🔞</span>
+        <div>
+          <div class="social-name">Rule 34</div>
+          <div class="social-handle">aza19</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/azza19art" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">📷</span>
+        <div>
+          <div class="social-name">Instagram</div>
+          <div class="social-handle">@azza19art</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+	
+	<a href="https://cara.app/aza19" target="_blank" rel="noopener" class="social-card">
+      <div class="social-card-left">
+        <span class="social-icon">🧑‍🎨</span>
+        <div>
+          <div class="social-name">Cara</div>
+          <div class="social-handle">aza19</div>
+        </div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+    <!--
+      TO ADD MORE SOCIALS: copy a block above and paste it here.
+      Change the href, icon, name and handle.
+    -->
+
+  </div>
+</section>
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer>
+  <p>© 2026 Aza Studio — All artwork rights reserved.</p>
+</footer>
+ 
+<!-- ──────────────── LIGHTBOX ──────────────── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-content"></div>
+    <div class="lightbox-meta">
+      <span id="lightbox-title"></span>
+      <span id="lightbox-year"></span>
+    </div>
+  </div>
+</div>
+ 
+<script>
+  /* Nav scroll shadow */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+ 
+  /* Tabs */
+  function switchTab(tab, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('sfw-panel').style.display  = tab === 'sfw'  ? 'block' : 'none';
+    document.getElementById('nsfw-panel').style.display = tab === 'nsfw' ? 'block' : 'none';
+  }
+ 
+  /* NSFW unlock */
+  function unlockNSFW() {
+    document.getElementById('nsfw-gate').style.display    = 'none';
+    document.getElementById('nsfw-gallery').style.display = 'block';
+  }
+ 
+  /* Accordion */
+  function toggleAccordion(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+ 
+  /* Lightbox Open */
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    const svg = el.querySelector('svg');
+    const titleEl = el.querySelector('.caption-title');
+    const yearEl = el.querySelector('.caption-year');
+
+    const box = document.getElementById('lightbox-content');
+    const title = titleEl?.textContent || '';
+    const year = yearEl?.textContent || '';
+
+    box.innerHTML = '';
+
+    const clone = (img || svg)?.cloneNode(true);
+    if (clone) {
+      // 1. Wipe out any gallery layout overrides
+      clone.removeAttribute('style');
+      clone.className = ''; 
+      
+      // 2. FORCE the image sizes directly so the browser can't ignore it
+      clone.style.position = 'relative';
+      clone.style.width = 'auto';
+      clone.style.height = 'auto';
+      clone.style.maxWidth = '70vw';   /* Limits width to 70% of screen */
+      clone.style.maxHeight = '55vh';  /* Limits height to 55% of screen */
+      clone.style.display = 'block';
+      clone.style.objectFit = 'contain';
+
+      box.appendChild(clone);
+    }
+
+    document.getElementById('lightbox-title').textContent = title;
+    document.getElementById('lightbox-year').textContent = year;
+
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+ 
+  /* Lightbox Close */
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+ 
+  /* Escape Key Listener for Lightbox */
+  document.addEventListener('keydown', e => { 
+    if (e.key === 'Escape') { 
+      closeLightbox(); 
+    } 
+  });
+</script>
+</body>
+</html>
