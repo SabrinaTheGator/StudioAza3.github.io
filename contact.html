@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Aza Studio</title>
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:title" content="Contact — Aza Studio" />
+  <meta property="og:description" content="Send Aza Studio your commission details." />
+  <meta property="og:image" content="images/necro.webp" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact — Aza Studio" />
+  <meta name="twitter:description" content="Send Aza Studio your commission details." />
+  <meta name="twitter:image" content="https://azastudio.art/images/necro.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sancreek&display=swap" rel="stylesheet">
+  <link rel="icon" type="images/favicon.png" href="images/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ──────────────── NAV ──────────────── -->
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">Aza Studio</a>
+  <ul class="nav-links">
+    <li><a href="gallery.html">Work</a></li>
+    <li><a href="index.html#commissions">Commissions</a></li>
+    <li><a href="index.html#terms">Terms</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="index.html#patreon">Patreon</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">☰</button>
+    <button class="nav-inquire" onclick="window.location.href='contact.html'">Inquire</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="gallery.html">Work</a>
+  <a href="index.html#commissions" onclick="closeMobileMenu()">Commissions</a>
+  <a href="index.html#terms" onclick="closeMobileMenu()">Terms</a>
+  <a href="index.html#faq" onclick="closeMobileMenu()">FAQ</a>
+  <a href="contact.html" onclick="closeMobileMenu()">Contact</a>
+  <a href="index.html#patreon" onclick="closeMobileMenu()">Patreon</a>
+</div>
+
+<!-- ──────────────── PAGE HERO ──────────────── -->
+<section class="page-hero">
+  <a href="index.html" class="page-hero-back">← Back to home</a>
+  <p class="section-eyebrow">Get In Touch</p>
+  <h2 class="section-title" style="margin-bottom:0">Send your commission details</h2>
+</section>
+
+<!-- ──────────────── CONTACT FORM ──────────────── -->
+<section class="section">
+  <div class="contact-form-wrap">
+
+    <form id="contactForm">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-field">
+          <label for="cf-email">Your Email</label>
+          <input type="email" id="cf-email" name="email" placeholder="you@email.com" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cf-type">Commission Type</label>
+          <select id="cf-type" name="type">
+            <option>Character Illustration (SFW)</option>
+            <option>Character Illustration (NSFW)</option>
+            <option>Character Sheet</option>
+            <option>Creature Design</option>
+            <option>Other / Not sure</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="cf-budget">Budget</label>
+          <input type="text" id="cf-budget" name="budget" placeholder="e.g. $50-100" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="cf-details">Commission Details</label>
+        <textarea id="cf-details" name="details" placeholder="References, character description, deadline, anything else I should know..." required></textarea>
+      </div>
+
+      <div class="form-submit-row">
+        <button type="submit" class="btn btn-primary">Send details <span class="btn-arrow">→</span></button>
+        <span class="form-note">Opens your email client with everything filled in — nothing sent automatically.</span>
+      </div>
+
+      <div class="form-success" id="formSuccess">Your email client should now be open with your message ready to send. Didn't pop up? Email me directly at contact@azastudio.art.</div>
+    </form>
+
+  </div>
+</section>
+
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer>
+  <p>© 2026 Aza Studio — All artwork rights reserved.</p>
+</footer>
+
+<!-- ──────────────── BACK TO TOP ──────────────── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ──────────────── LIGHTBOX (unused here, kept so script.js doesn't error) ──────────────── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-content"></div>
+    <div class="lightbox-meta">
+      <span id="lightbox-title"></span>
+      <span id="lightbox-year"></span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  const CONTACT_EMAIL = 'contact@azastudio.art';
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('cf-name').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const type    = document.getElementById('cf-type').value;
+    const budget  = document.getElementById('cf-budget').value.trim();
+    const details = document.getElementById('cf-details').value.trim();
+
+    const subject = `Commission Inquiry — ${name}`;
+    const body =
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Commission type: ${type}\n` +
+      `Budget: ${budget || 'Not specified'}\n\n` +
+      `Details:\n${details}`;
+
+    const mailtoLink =
+      `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoLink;
+
+    document.getElementById('formSuccess').classList.add('show');
+  });
+</script>
+</body>
+</html>
