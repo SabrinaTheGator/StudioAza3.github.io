@@ -8,12 +8,12 @@
   <!-- Open Graph / Social Preview -->
   <meta property="og:title" content="Aza Studio — Commissions Open" />
   <meta property="og:description" content="Character portraits, illustrations, and OC art. SFW & NSFW commissions currently open." />
-  <meta property="og:image" content="images/necro.webp" />
+  <meta property="og:image" content="images/banner.jpg" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Aza Studio — Commissions Open" />
   <meta name="twitter:description" content="Character portraits, illustrations, and OC art. SFW & NSFW commissions currently open." />
-  <meta name="twitter:image" content="https://azastudio.art/images/necro.webp" />
+  <meta name="twitter:image" content="https://azastudio.art/images/banner.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -25,7 +25,7 @@
 
 <!-- ──────────────── NAV ──────────────── -->
 <nav id="navbar">
-  <a class="nav-logo" href="index.html">Aza Studio</a>
+  <a class="nav-logo" href="index.html">Aza</a>
   <ul class="nav-links">
     <li><a href="gallery.html">Work</a></li>
     <li><a href="#commissions">Commissions</a></li>
@@ -51,21 +51,24 @@
 
 <!-- ──────────────── HERO ──────────────── -->
 <section id="home">
-  <div class="hero-layout">
-    <div class="hero-copy">
-      <div class="status-badge"><span class="status-dot"></span>Commissions Open</div>
-      <p class="hero-kicker">AZA STUDIO / ILLUSTRATION</p>
-      <h1 class="hero-headline">I draw characters<br><span class="hero-headline-accent">worth remembering.</span></h1>
-      <p class="hero-desc">Inks, character sheets and creature designs — original characters, fanart, sketches and full illustrations, drawn in Aza Studio's signature style.</p>
-      <div class="btn-group hero-actions">
-        <a href="#contact" class="btn btn-primary">Hire me <span class="btn-arrow">→</span></a>
-        <a href="gallery.html" class="btn btn-secondary">View work</a>
-        <a href="https://www.patreon.com/cw/Aza21" target="_blank" rel="noopener" class="btn btn-secondary">Support the ink</a>
+  <div class="hero-media">
+    <img class="hero-media-img" src="images/necro.webp" alt="Aza Studio featured artwork" />
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Commissions Open
       </div>
-      <p class="hero-stats">24H REPLY <span class="hero-stats-sep">·</span> 50% DEPOSIT TO START <span class="hero-stats-sep">·</span> 40+ COMMISSIONS DELIVERED</p>
-    </div>
-    <div class="hero-art">
-      <div class="hero-art-frame"><img class="hero-bg-image" src="images/necro.webp" alt="Aza Studio artwork" /><div class="hero-art-glow"></div></div>
+      <p class="hero-eyebrow">Illustrator · OCs · Fanart · Commissions</p>
+      <h1 class="hero-headline">Characters that<br><span class="hero-headline-accent">stay with you</span></h1>
+      <p class="hero-flourish">Character art that doesn't blend in</p>
+      <p class="hero-desc">Drawing your faves (and my own) since 2023 • OC portraits • Fanart </p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary">Commission me <span class="btn-arrow">↗</span></a>
+        <a href="gallery.html" class="btn btn-secondary">View work</a>
+        <a href="https://www.patreon.com/cw/Aza21" target="_blank" rel="noopener" class="btn btn-secondary">Support on Patreon</a>
+      </div>
+      <p class="hero-stats">24H REPLY <span class="hero-stats-sep">·</span> 50% DEPOSIT TO START <span class="hero-stats-sep">·</span> 20+ DELIVERED</p>
     </div>
   </div>
 </section>
@@ -77,7 +80,7 @@
       <p class="section-eyebrow">01 — Portfolio</p>
       <h2 class="section-title" style="margin-bottom:0">Selected work</h2>
     </div>
-    <p class="portfolio-header-note">A quick look. The full gallery — including 18+ pieces — lives on its own page.</p>
+    <p class="portfolio-header-note">A quick look. The full gallery, including 18+ pieces, lives on its own page</p>
   </div>
 
   <div class="gallery">
@@ -114,38 +117,6 @@
       </div>
     </div>
 
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <img class="art-placeholder" src="images/frieren.webp" alt="Frieren" loading="lazy" />
-      <div class="gallery-caption">
-        <span class="caption-title">Frieren</span>
-        <span class="caption-year">2026</span>
-      </div>
-    </div>
-
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <img class="art-placeholder" src="images/jolyne.webp" alt="Christmas Jolyne" loading="lazy" />
-      <div class="gallery-caption">
-        <span class="caption-title">Christmas Jolyne</span>
-        <span class="caption-year">2025</span>
-      </div>
-    </div>
-
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <img class="art-placeholder" src="images/horse.webp" alt="Horse Vgen Challenge" loading="lazy" />
-      <div class="gallery-caption">
-        <span class="caption-title">Horse Vgen Challenge</span>
-        <span class="caption-year">2026</span>
-      </div>
-    </div>
-
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <img class="art-placeholder" src="images/asta.webp" alt="Asta" loading="lazy" />
-      <div class="gallery-caption">
-        <span class="caption-title">Asta</span>
-        <span class="caption-year">2025</span>
-      </div>
-    </div>
-
   </div>
 
   <div class="gallery-preview-footer">
@@ -159,7 +130,7 @@
     <div class="comm-left">
       <p class="section-eyebrow">02 — Status</p>
       <h2 class="section-title">Commissions<br><span class="comm-open">are open.</span></h2>
-      <p class="comm-desc">Slots are limited and filled on a first-come, first-served basis. Read the terms below before reaching out, then drop me a line with your reference.</p>
+      <p class="comm-desc">Slots are limited and filled on a first come, first served basis. Read the terms below before reaching out, then drop me a line with your reference.</p>
       <div class="btn-group">
         <a href="#contact" class="btn btn-primary">Get in touch <span class="btn-arrow">↗</span></a>
         <a href="#terms" class="btn btn-secondary">Read the terms</a>
@@ -239,7 +210,7 @@
           <span class="accordion-icon">⌄</span>
         </button>
         <div class="accordion-body">
-          <p><strong style="color:var(--text)">Will draw:</strong> Illustrations, pinups, portraits, sfw/nsfw, OC's, sketches, linearts, Simple backgrounds (swirls, paint splatter, zoomed out character etc) and full colors/renders.<br><br><strong style="color:var(--text)">Won't draw:</strong> Loli/Shota (in any context), Real people in NSFW scenarios, Hate symbols, Revenge Porn, Logos, Thing outside of my artstyle (like for example Photorealism, Enviroments, Etc), Heavy fetishes like Scat, Inflation, Vore, or something that would make me uncomfortable, Exaggerated sized genitalia, Non consensual, AI generated references for commissions, anything else feel free to ask</p>
+          <p><strong style="color:var(--text)">Will draw:</strong> Illustrations, pinups, portraits, sfw/nsfw, OC's, sketches, linearts, Simple backgrounds (swirls, paint splatter, zoomed out character etc), I'm not a furry artist but I will draw Furry Art if requested, thumbnails and full colors/renders.<br><br><strong style="color:var(--text)">Won't draw:</strong> Loli/Shota (in any context), Real people in NSFW scenarios, Hate symbols, Revenge Porn, Logos, Thing outside of my artstyle (like for example Photorealism, Enviroments, Etc), Heavy fetishes like Scat, Inflation, Vore, or something that would make me uncomfortable, Exaggerated sized genitalia, Non consensual, AI generated references for commissions, anything else feel free to ask</p>
         </div>
       </div>
 
@@ -329,21 +300,10 @@
       <p class="section-eyebrow">05 — Reach Out</p>
       <h2 class="section-title" style="margin-bottom:0">Contact &amp; Payment</h2>
     </div>
-    <p class="contact-note">Discord is best for commission inquiries. PayPal for payment.</p>
+    <p class="contact-note">Discord is best for commission inquiries. PayPal for payment. Prefer email? Use the form.</p>
   </div>
 
   <div class="contact-cards">
-
-    <a href="contact.html" class="contact-card">
-      <div class="contact-card-label">
-        EMAIL
-        <span class="contact-arrow">↗</span>
-      </div>
-      <div class="contact-val">
-        <span class="contact-icon">✉️</span>
-        contact@azastudio.art
-      </div>
-    </a>
 
     <a href="https://discord.gg/rvh2tM8h9e" class="contact-card">
       <div class="contact-card-label">
@@ -375,6 +335,17 @@
       <div class="contact-val">
         <span class="contact-icon">♡</span>
         patreon.com/Aza21
+      </div>
+    </a>
+
+    <a href="inquiry.html" class="contact-card">
+      <div class="contact-card-label">
+        EMAIL
+        <span class="contact-arrow">↗</span>
+      </div>
+      <div class="contact-val">
+        <span class="contact-icon">✉</span>
+        Send a commission inquiry
       </div>
     </a>
 
