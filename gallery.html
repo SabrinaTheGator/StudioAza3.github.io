@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Aza Studio</title>
+
+  <meta property="og:title" content="Aza Studio — Gallery" />
+  <meta property="og:description" content="Character portraits, illustrations, and OC art. SFW & NSFW." />
+  <meta property="og:image" content="https://azastudio.art/images/banner.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aza Studio — Gallery" />
+  <meta name="twitter:description" content="Character portraits, illustrations, and OC art. SFW & NSFW." />
+  <meta name="twitter:image" content="https://azastudio.art/images/banner.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sancreek&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/favicon.webp" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ──────────────── NAV ──────────────── -->
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">Aza</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html" class="active">Work</a></li>
+    <li><a href="commission.html">Commissions</a></li>
+    <li><a href="commission.html#terms">Terms</a></li>
+    <li><a href="commission.html#faq">FAQ</a></li>
+    <li><a href="index.html#patreon">Patreon</a></li>
+    <li><a href="index.html#discord">Discord</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">☰</button>
+    <button class="nav-inquire" onclick="window.location.href='commission.html#inquiry'">Inquire</button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="gallery.html" class="active">Work</a>
+  <a href="commission.html">Commissions</a>
+  <a href="commission.html#terms">Terms</a>
+  <a href="commission.html#faq">FAQ</a>
+  <a href="index.html#patreon">Patreon</a>
+  <a href="index.html#discord">Discord</a>
+</div>
+
+<!-- ──────────────── PAGE HERO ──────────────── -->
+<div class="page-hero">
+  <a href="index.html" class="page-hero-back">← Back to home</a>
+  <p class="section-eyebrow">01 — Portfolio</p>
+  <h2 class="section-title" style="margin-bottom:0">Full gallery</h2>
+</div>
+
+<!-- ──────────────── PORTFOLIO ──────────────── -->
+<section id="work" class="section" style="padding-top:40px;">
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab('sfw',this)">SFW</div>
+    <div class="tab" onclick="switchTab('nsfw',this)">NSFW <span class="tag-18">18+</span></div>
+  </div>
+
+  <div class="gallery-toolbar">
+    <input type="text" id="gallery-search" class="gallery-search" placeholder="Search by title…" oninput="applyGalleryFilter()" />
+    <select id="gallery-sort" class="gallery-sort" onchange="applyGallerySort()">
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+      <option value="az">Title A–Z</option>
+    </select>
+  </div>
+
+  <!-- SFW Gallery -->
+  <div id="sfw-panel">
+    <div class="gallery">
+
+      <div class="gallery-item" data-date="2026-01-20" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/goblin.webp" alt="Goblin Slayer" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Goblin Slayer</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-03-09" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/wings.webp" alt="Nikka Wings" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Nikka Wings(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-02-14" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/love2.webp" alt="Chibi Love" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Chibi Love</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-06-04" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/necro.webp" alt="Nekro" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Nekro(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-05-03" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/lumire.webp" alt="Lumire" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Lumire(OC)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-08-20" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/atlas.webp" alt="Atlas" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Atlas(OC)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-12-17" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/Family.webp" alt="Family" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Family(OC)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-07-15" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/tetogta.webp" alt="Teto GTA" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Teto GTA</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-08-28" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/nikka4.webp" alt="Nikka" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Nikka(OC)</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-06-09" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/alienteto.webp" alt="Alien Teto" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Alien Teto</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-01-17" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/nikkacute.webp" alt="Chibi Nikka" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Chibi Nikka(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-12-04" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/Reze.webp" alt="Reze" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Reze</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-05-20" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/asta.webp" alt="Asta" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Asta</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-02-14" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/love.webp" alt="Love" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Love</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-04-17" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/nekro.webp" alt="Nekro" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Nekro(OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-06-05" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/favicon.webp" alt="Dark Nikka" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Dark Nikka</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-01-21" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/frieren.webp" alt="Frieren" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Frieren</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-05-09" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/power.webp" alt="Silver Ranger" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Silver Ranger</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-06-04" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/teto2.webp" alt="Teto" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Teto</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-08-21" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/spice.webp" alt="Spice" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Spice</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-12-29" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/jolyne.webp" alt="Christmas Jolyne" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Christmas Jolyne</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-06-09" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/horse.webp" alt="Horse Vgen Challenge" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Horse Vgen Challenge</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2026-05-22" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/nikka3.webp" alt="Nikka" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Nikka (OC)</span>
+          <span class="caption-year">2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-date="2025-08-02" onclick="openLightbox(this)">
+        <img class="art-placeholder" src="images/rabbit.webp" alt="Rabbit Hole Miku Bday gift" loading="lazy" />
+        <div class="gallery-caption">
+          <span class="caption-title">Rabbit Hole Miku Bday gift</span>
+          <span class="caption-year">2025</span>
+        </div>
+      </div>
+
+    </div>
+    <p class="gallery-empty" style="display:none;">No pieces match your search.</p>
+  </div>
+
+  <!-- NSFW Panel -->
+  <div id="nsfw-panel" class="nsfw-panel">
+
+    <div id="nsfw-gate" class="nsfw-gate">
+      <h3>Age-Gated Content</h3>
+      <p>This section contains mature (18+) artwork. By continuing you confirm you are 18 or older and consent to viewing adult content.</p>
+      <button class="btn btn-primary" onclick="unlockNSFW()">I am 18+ — Enter</button>
+    </div>
+
+    <div id="nsfw-gallery" style="display:none;">
+      <div class="gallery">
+
+        <div class="gallery-item" data-date="2026-06-15" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/pomni.webp" alt="Pomni" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Pomni Anal</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-06-18" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/rebecca.webp" alt="Rebecca" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Rebecca</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2025-12-29" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/Dex.webp" alt="Dex" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Dex(OC)</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-01-02" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/Neru.webp" alt="Akita Neru" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Akita Neru</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-06-27" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/mina.webp" alt="Mina" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Mina (MHA)</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-04-09" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/cat.webp" alt="Catalyst" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Catalyst</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-04-14" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/Raven.webp" alt="Raven" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Raven</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-06-10" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/kiara.webp" alt="Kiara" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Kiara JJK</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-02-18" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/Jane.webp" alt="Jane Doe" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Jane Doe</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2025-11-26" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/Teto.webp" alt="Kasane Teto" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Kasane Teto</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2025-08-16" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/makima.webp" alt="Makima Shower" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Makima Shower</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-05-09" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/axle.webp" alt="Axle Apex" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Axle Apex</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-06-01" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/kit.webp" alt="Kit" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Kit</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2025-05-10" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/teto3.webp" alt="Teto and Pear" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Teto and Pear</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2025-09-26" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/femboy.webp" alt="Femboy cock" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Femboy cock</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2025-08-26" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/lucy.webp" alt="Lucy" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Lucy</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-01-21" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/elf.webp" alt="Frieran" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Frieran</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-01-25" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/21.webp" alt="Android 21" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Android 21</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-05-04" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/axle2.webp" alt="Axle Apex" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Axle Apex</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2025-06-11" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/alien.webp" alt="Alien Teto" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Alien Teto</span>
+            <span class="caption-year">2025</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-06-29" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/gard.webp" alt="Gardevior" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Gardevior</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-01-25" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/puss.webp" alt="Teto's Kitty" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Teto's Kitty</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-02-02" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/zero.webp" alt="Zero" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Zero (OC)</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-date="2026-04-06" onclick="openLightbox(this)">
+          <img class="art-placeholder" src="images/volc.webp" alt="Volcanikka" loading="lazy" />
+          <div class="gallery-caption">
+            <span class="caption-title">Volcanikka (Invincible)</span>
+            <span class="caption-year">2026</span>
+          </div>
+        </div>
+
+        <!--
+          TO ADD MORE IMAGES: copy the block below and paste it here,
+          then change the src, alt, title and year.
+
+          <div class="gallery-item" data-date="2025-01-01" onclick="openLightbox(this)">
+            <img class="art-placeholder" src="images/YOUR-IMAGE.jpg" alt="Your Title" loading="lazy" />
+            <div class="gallery-caption">
+              <span class="caption-title">Your Title</span>
+              <span class="caption-year">2025</span>
+            </div>
+          </div>
+        -->
+
+      </div>
+      <p class="gallery-empty" style="display:none;">No pieces match your search.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-brand-top">
+        <span class="footer-mark">A</span>
+        <span class="footer-wordmark">Aza<span class="footer-wordmark-accent">Studio</span></span>
+      </a>
+      <p class="footer-tagline">Character portraits, illustrations, and OC art. Commissions open — slots are limited.</p>
+      <a href="commission.html" class="btn btn-primary footer-cta">Start a commission <span class="btn-arrow">↗</span></a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title footer-col-title-accent">Follow</p>
+      <div class="footer-follow-grid">
+        <a href="https://x.com/Aza19art" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">𝕏</span> Twitter
+        </a>
+        <a href="https://www.instagram.com/aza19art" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">IG</span> Instagram
+        </a>
+        <a href="https://www.deviantart.com/azzza19art" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">DA</span> DeviantArt
+        </a>
+        <a href="https://azza19art.newgrounds.com" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">NG</span> NewGrounds
+        </a>
+        <a href="https://rule34.xxx/index.php?page=post&s=list&tags=aza19" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">R34</span> Rule 34
+        </a>
+        <a href="https://www.redbubble.com/people/azzza19OG" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">RB</span> Redbubble
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title">Info</p>
+      <ul class="footer-info-list">
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="commission.html#terms">Terms</a></li>
+        <li><a href="commission.html#faq">FAQ</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Aza Studio</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <button type="button" class="footer-totop" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top ↑</button>
+  </div>
+</footer>
+
+<!-- ──────────────── BACK TO TOP ──────────────── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ──────────────── LIGHTBOX ──────────────── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-content"></div>
+    <div class="lightbox-meta">
+      <span id="lightbox-title"></span>
+      <span id="lightbox-year"></span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
