@@ -7,7 +7,7 @@ window.addEventListener('scroll', () => {
 /* ─── Scroll-reveal for cards & section intros ─── */
 document.addEventListener('DOMContentLoaded', () => {
   const revealTargets = document.querySelectorAll(
-    '.gallery-item, .contact-card, .footer-link-pill, .accordion-item, .comm-image, .patreon-box, .comm-left, .terms-left, .portfolio-header, .tier-card, .addons-box, .estimate-box, .terms-mini, .rates-preview, .rates-info, .review-image, .review-text-card, .about-content, .about-media'
+    '.gallery-item, .contact-card, .social-card, .accordion-item, .comm-image, .patreon-box, .comm-left, .terms-left, .portfolio-header, .tier-card, .addons-box, .estimate-box, .terms-mini, .rates-preview, .rates-info, .review-image, .review-text-card'
   );
 
   // Stagger items that share a parent grid/row so they cascade in rather than popping at once
@@ -196,6 +196,7 @@ function closeLightbox(e) {
     document.body.style.overflow = '';
   }
 }
+
 /* Escape Key Listener for Lightbox */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -207,10 +208,10 @@ document.addEventListener('keydown', e => {
    Tier prices now depend on which rate type (Sketch / Fully Rendered) is
    selected up in the Commission Rates tabs — Sketch is cheaper. */
 const TIER_DATA = {
-  bust:  { price: { sketch: 10,   flat: 15,    rendered: 20 }, plus: false },
-  waist: { price: { sketch: 12.5, flat: 18.75, rendered: 25 }, plus: false },
-  thigh: { price: { sketch: 15,   flat: 22.5,  rendered: 30 }, plus: false },
-  full:  { price: { sketch: 25,   flat: 37.5,  rendered: 50 }, plus: true  }
+  bust:  { price: { sketch: 10,   rendered: 20 }, plus: false },
+  waist: { price: { sketch: 12.5, rendered: 25 }, plus: false },
+  thigh: { price: { sketch: 15,   rendered: 30 }, plus: false },
+  full:  { price: { sketch: 25,   rendered: 50 }, plus: true  }
 };
 
 /* Format a price for display — whole numbers show plain, anything with
@@ -225,13 +226,6 @@ const ADDON_DATA = {
   rush:     { pct: [0.3, 0.5] } ,
   simple:  { flat: [3, 5] } ,
   major:  { flat: [10, 15] } ,
-};
-
-/* ─── Commission Rates tabs (commission.html only — no-ops elsewhere) ─── */
-const RATE_DATA = {
-  sketch:   { tag: 'Full Body Sketch Sample',         title: 'Sketch',      desc: 'Clean linework, no rendering' },
-  flat:     { tag: 'Flat Color Thigh Up Sample',     title: 'Flat Color',  desc: 'Flat, even color — no shading or lighting' },
-  rendered: { tag: 'Fully Rendered Bust Sample', title: 'Fully Rendered', desc: 'Full colour, lighting and polish' }
 };
 
 let selectedRateType = 'rendered'; // matches the tab marked "active" in the HTML
@@ -268,10 +262,6 @@ function updateEstimate() {
   const tierName = tierEl.querySelector('.tier-title').textContent;
   const basePrice = tier.price[selectedRateType];
   let total = basePrice;
-  // Tracks the true minimum this stack could cost using each addon's
-  // advertised floor (e.g. Simple Alterations' "+$3"), so rounding below
-  // can't ever undercut what was promised on the pill itself.
-  let minTotal = basePrice;
   let hasQuote = false;
   let hasAddonAdjustment = false;
 
@@ -281,13 +271,11 @@ function updateEstimate() {
     if (addon.quote) { hasQuote = true; return; }
     hasAddonAdjustment = true;
     if (addon.pct !== undefined) {
-      const pctRange = Array.isArray(addon.pct) ? addon.pct : [addon.pct, addon.pct];
-      total += basePrice * ((pctRange[0] + pctRange[1]) / 2);
-      minTotal += basePrice * pctRange[0];
+      const pct = Array.isArray(addon.pct) ? (addon.pct[0] + addon.pct[1]) / 2 : addon.pct;
+      total += basePrice * pct;
     }
     if (addon.flat) {
       total += (addon.flat[0] + addon.flat[1]) / 2;
-      minTotal += addon.flat[0];
     }
   });
 
@@ -295,11 +283,6 @@ function updateEstimate() {
   // otherwise this was clobbering exact base prices (e.g. $12.50 sketch).
   if (hasAddonAdjustment) {
     total = Math.round(total / 5) * 5;
-    // Bug fix: rounding to the nearest $5 could land BELOW an addon's
-    // advertised minimum (e.g. Waist Up + Sketch + Simple Alterations
-    // rounded down to a +$2.50 surcharge, undercutting the stated +$3
-    // floor). Never let the rounded total dip under that floor.
-    if (total < minTotal) total = minTotal;
   }
   const plus = tier.plus || hasQuote;
 
@@ -328,8 +311,7 @@ function updateEstimate() {
   if (sumInput) sumInput.value = rateTitle + ' · ' + tierName + ' · est. ' + displayPrice;
 
   // Keep the "Commission type" pill in the inquiry form aligned with the active rate tab
-  const ctypeIds = { sketch: 'ctype-sketch', flat: 'ctype-flat', rendered: 'ctype-rendered' };
-  const matchingPill = document.getElementById(ctypeIds[selectedRateType] || 'ctype-rendered');
+  const matchingPill = document.getElementById(selectedRateType === 'sketch' ? 'ctype-sketch' : 'ctype-rendered');
   if (matchingPill) matchingPill.checked = true;
 }
 
@@ -339,6 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
     updateEstimate();
   }
 });
+
+/* ─── Commission Rates tabs (commission.html only — no-ops elsewhere) ─── */
+const RATE_DATA = {
+  sketch:   { tag: 'Sketch Sample',         title: 'Sketch',         desc: 'Clean linework, no rendering' },
+  rendered: { tag: 'Fully Rendered Sample', title: 'Fully Rendered', desc: 'Full colour, lighting and polish' }
+};
 
 function selectRateTab(btn) {
   document.querySelectorAll('.rates-tab').forEach(t => t.classList.remove('active'));
@@ -356,14 +344,6 @@ function selectRateTab(btn) {
   document.querySelectorAll('.rates-preview-slot').forEach(slot => {
     slot.classList.toggle('active', slot.dataset.rateSlot === btn.dataset.rate);
   });
-
-  // Replay the info panel's staggered fade-in every time the tab changes
-  const infoBox = document.querySelector('.rates-info');
-  if (infoBox) {
-    infoBox.classList.remove('rates-info-flash');
-    void infoBox.offsetWidth; // force reflow so the animation restarts
-    infoBox.classList.add('rates-info-flash');
-  }
 
   updateTierPrices();
   updateEstimate();
@@ -403,160 +383,25 @@ function updateBriefCount() {
   counter.classList.toggle('valid', len >= min);
 }
 
-/* ─── Auto-compress reference images so multi-image inquiries fit under
-   FormSubmit's 10MB-combined attachment cap (it's a total across every
-   file input on the form, not 10MB per file) ─── */
-
-// Leave a safety margin under FormSubmit's real 10MB combined cap.
-const MAX_TOTAL_UPLOAD_BYTES = 9 * 1024 * 1024;
-let uploadProcessing = false;
-
-function formatBytes(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' KB';
-  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-}
-
-function fileListFrom(files) {
-  const dt = new DataTransfer();
-  files.forEach(f => dt.items.add(f));
-  return dt.files;
-}
-
-function loadImageEl(file) {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => resolve({ img, url });
-    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode failed')); };
-    img.src = url;
-  });
-}
-
-// Resize/re-encode a single image toward a target byte budget. Falls back
-// to the original file untouched if it can't be decoded (e.g. HEIC in
-// browsers without native support) or if it's already small enough.
-async function compressImageFile(file, targetBytes) {
-  if (!file.type || !file.type.startsWith('image/')) return file;
-  if (file.size <= targetBytes) return file;
-
-  let loaded;
-  try {
-    loaded = await loadImageEl(file);
-  } catch (e) {
-    return file;
-  }
-  const { img, url } = loaded;
-
-  let width = img.naturalWidth;
-  let height = img.naturalHeight;
-  const maxDim = 2400;
-  const scale = Math.min(1, maxDim / Math.max(width, height));
-  width = Math.round(width * scale);
-  height = Math.round(height * scale);
-
-  let quality = 0.85;
-  let blob = null;
-
-  for (let attempt = 0; attempt < 8; attempt++) {
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, width, height);
-    // eslint-disable-next-line no-await-in-loop
-    blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', quality));
-    if (!blob || blob.size <= targetBytes) break;
-    if (quality > 0.45) {
-      quality -= 0.12;
-    } else {
-      width = Math.round(width * 0.82);
-      height = Math.round(height * 0.82);
-    }
-    if (width < 500 || height < 500) break; // keep it usable as a reference
-  }
-
-  URL.revokeObjectURL(url);
-  if (!blob || blob.size >= file.size) return file;
-
-  const newName = file.name.replace(/\.[^.]+$/, '') + '.jpg';
-  return new File([blob], newName, { type: 'image/jpeg', lastModified: Date.now() });
-}
-
-// Re-checks both file inputs together, compresses anything oversized, and
-// updates the on-page size readout — this is what actually keeps the whole
-// submission under FormSubmit's combined 10MB limit.
-async function processAllFiles() {
-  const refsInput = document.getElementById('inquiry-refs');
-  const poseInput = document.getElementById('inquiry-pose');
-  const refsList = document.getElementById('inquiry-refs-files');
-  const poseList = document.getElementById('inquiry-pose-files');
-  const statusEl = document.getElementById('inquiry-upload-status');
-  if (!refsInput) return;
-
-  const refFiles = refsInput.files ? Array.from(refsInput.files) : [];
-  const poseFiles = poseInput && poseInput.files ? Array.from(poseInput.files) : [];
-  const totalCount = refFiles.length + poseFiles.length;
-
-  if (totalCount === 0) {
-    if (refsList) refsList.textContent = '';
-    if (poseList) poseList.textContent = '';
-    if (statusEl) { statusEl.textContent = ''; statusEl.className = 'inq-upload-status'; }
-    return;
-  }
-
-  uploadProcessing = true;
-  if (statusEl) {
-    statusEl.textContent = 'Optimizing images…';
-    statusEl.className = 'inq-upload-status compressing';
-  }
-
-  const perFileTarget = Math.max(
-    400 * 1024,
-    Math.min(4 * 1024 * 1024, MAX_TOTAL_UPLOAD_BYTES / totalCount)
-  );
-
-  const [compressedRefs, compressedPose] = await Promise.all([
-    Promise.all(refFiles.map(f => compressImageFile(f, perFileTarget))),
-    Promise.all(poseFiles.map(f => compressImageFile(f, perFileTarget)))
-  ]);
-
-  refsInput.files = fileListFrom(compressedRefs);
-  if (poseInput) poseInput.files = fileListFrom(compressedPose);
-
-  function renderList(list, files) {
-    if (!list) return;
-    if (!files.length) { list.textContent = ''; return; }
-    const parts = files.map(f => f.name + ' (' + formatBytes(f.size) + ')');
-    list.textContent = files.length + (files.length === 1 ? ' file: ' : ' files: ') + parts.join(', ');
-  }
-  renderList(refsList, compressedRefs);
-  renderList(poseList, compressedPose);
-
-  const totalBytes = compressedRefs.reduce((s, f) => s + f.size, 0) +
-                      compressedPose.reduce((s, f) => s + f.size, 0);
-
-  if (statusEl) {
-    if (totalBytes > MAX_TOTAL_UPLOAD_BYTES) {
-      statusEl.textContent = 'Combined size ' + formatBytes(totalBytes) + ' is still too big for email — remove an image or two.';
-      statusEl.className = 'inq-upload-status error';
-    } else {
-      statusEl.textContent = 'Combined upload size: ' + formatBytes(totalBytes) + ' (auto-optimized to fit)';
-      statusEl.className = 'inq-upload-status valid';
-    }
-  }
-
-  uploadProcessing = false;
-}
-
-/* Drag-and-drop reference image dropzones — visual handling plus triggering
-   the auto-compression pass above whenever files are picked or dropped */
-function initDropzone(zoneId, inputId) {
+/* Drag-and-drop reference image dropzones (visual only — the underlying
+   <input type="file"> still drives the actual form submission) */
+function initDropzone(zoneId, inputId, listId) {
   const zone = document.getElementById(zoneId);
   const input = document.getElementById(inputId);
+  const list = document.getElementById(listId);
   if (!zone || !input) return;
 
-  input.addEventListener('change', () => { processAllFiles(); });
+  function renderFiles() {
+    if (!list) return;
+    if (!input.files || input.files.length === 0) {
+      list.textContent = '';
+      return;
+    }
+    const names = Array.from(input.files).map(f => f.name);
+    list.textContent = names.length + (names.length === 1 ? ' file: ' : ' files: ') + names.join(', ');
+  }
+
+  input.addEventListener('change', renderFiles);
 
   ['dragenter', 'dragover'].forEach(evt => {
     zone.addEventListener(evt, e => {
@@ -573,14 +418,14 @@ function initDropzone(zoneId, inputId) {
   zone.addEventListener('drop', e => {
     if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
       input.files = e.dataTransfer.files;
-      processAllFiles();
+      renderFiles();
     }
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initDropzone('inquiry-refs-zone', 'inquiry-refs');
-  initDropzone('inquiry-pose-zone', 'inquiry-pose');
+  initDropzone('inquiry-refs-zone', 'inquiry-refs', 'inquiry-refs-files');
+  initDropzone('inquiry-pose-zone', 'inquiry-pose', 'inquiry-pose-files');
   updateBriefCount();
   toggleNsfwConfirm();
 });
@@ -601,71 +446,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 
-  inquiryForm.addEventListener('submit', function (e) {
+  inquiryForm.addEventListener('submit', function () {
     const submitBtn = document.getElementById('inquiry-submit');
-    const statusEl = document.getElementById('inquiry-status');
-
-    // If a compression pass is still running, don't let a stale/oversized
-    // file slip through — ask the user to try again in a moment.
-    if (uploadProcessing) {
-      e.preventDefault();
-      if (statusEl) {
-        statusEl.textContent = 'Still optimizing your images — hit send again in a second.';
-        statusEl.classList.add('inquiry-status-error');
-      }
-      return;
-    }
-
-    // Final safety check across both file inputs combined.
-    const refsInput = document.getElementById('inquiry-refs');
-    const poseInput = document.getElementById('inquiry-pose');
-    const refFiles = refsInput && refsInput.files ? Array.from(refsInput.files) : [];
-    const poseFiles = poseInput && poseInput.files ? Array.from(poseInput.files) : [];
-    const totalBytes = refFiles.reduce((s, f) => s + f.size, 0) + poseFiles.reduce((s, f) => s + f.size, 0);
-
-    if (totalBytes > MAX_TOTAL_UPLOAD_BYTES) {
-      e.preventDefault();
-      if (statusEl) {
-        statusEl.textContent = 'Your images total ' + formatBytes(totalBytes) + ' — please remove one or two before sending.';
-        statusEl.classList.add('inquiry-status-error');
-      }
-      return;
-    }
-
-    // FormSubmit only forwards ONE file per field name — if several files
-    // share a name (which is what the "multiple" attribute naturally does),
-    // every file after the first gets silently dropped. So instead of
-    // submitting the visible multi-file inputs directly, give every image
-    // its own uniquely-named hidden field right before the real POST.
-    e.preventDefault();
-
-    inquiryForm.querySelectorAll('.inq-generated-file-input').forEach(el => el.remove());
-
-    function attachIndividually(files, baseName) {
-      files.forEach((file, i) => {
-        const hidden = document.createElement('input');
-        hidden.type = 'file';
-        hidden.name = files.length > 1 ? baseName + '_' + (i + 1) : baseName;
-        hidden.style.display = 'none';
-        hidden.className = 'inq-generated-file-input';
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        hidden.files = dt.files;
-        inquiryForm.appendChild(hidden);
-      });
-    }
-
-    attachIndividually(refFiles, 'character_reference');
-    attachIndividually(poseFiles, 'pose_reference');
-
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
     }
-
-    // Bypass this same 'submit' listener (native .submit() doesn't re-fire
-    // the 'submit' event) and perform the real POST with the newly built,
-    // uniquely-named file fields in place.
-    HTMLFormElement.prototype.submit.call(inquiryForm);
   });
 });

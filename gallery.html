@@ -7,7 +7,7 @@
 
   <meta property="og:title" content="Aza Studio — Gallery" />
   <meta property="og:description" content="Character portraits, illustrations, and OC art. SFW & NSFW." />
-  <meta property="og:image" content="images/banner.jpg" />
+  <meta property="og:image" content="https://azastudio.art/images/banner.jpg" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Aza Studio — Gallery" />
@@ -17,35 +17,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Sancreek&display=swap" rel="stylesheet">
-  <link rel="icon" type="images/favicon.png" href="images/favicon.png" />
+  <link rel="icon" type="image/png" href="images/favicon.webp" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <!-- ──────────────── NAV ──────────────── -->
 <nav id="navbar">
-  <a class="nav-logo" href="index.html">Aza Studio</a>
+  <a class="nav-logo" href="index.html">Aza</a>
   <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html" class="active">Work</a></li>
-    <li><a href="index.html#commissions">Commissions</a></li>
-    <li><a href="index.html#terms">Terms</a></li>
-    <li><a href="index.html#faq">FAQ</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="commission.html">Commissions</a></li>
+    <li><a href="commission.html#terms">Terms</a></li>
+    <li><a href="commission.html#faq">FAQ</a></li>
     <li><a href="index.html#patreon">Patreon</a></li>
+    <li><a href="index.html#discord">Discord</a></li>
   </ul>
   <div class="nav-right">
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">☰</button>
-    <button class="nav-inquire" onclick="window.location.href='index.html#contact'">Inquire</button>
+    <button class="nav-inquire" onclick="window.location.href='commission.html#inquiry'">Inquire</button>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
   <a href="gallery.html" class="active">Work</a>
-  <a href="index.html#commissions">Commissions</a>
-  <a href="index.html#terms">Terms</a>
-  <a href="index.html#faq">FAQ</a>
-  <a href="index.html#contact">Contact</a>
+  <a href="commission.html">Commissions</a>
+  <a href="commission.html#terms">Terms</a>
+  <a href="commission.html#faq">FAQ</a>
   <a href="index.html#patreon">Patreon</a>
+  <a href="index.html#discord">Discord</a>
 </div>
 
 <!-- ──────────────── PAGE HERO ──────────────── -->
@@ -284,7 +286,7 @@
       <div class="gallery">
 
         <div class="gallery-item" data-date="2026-06-15" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/pomni.webp" alt="Piece 1" loading="lazy" />
+          <img class="art-placeholder" src="images/pomni.webp" alt="Pomni" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Pomni Anal</span>
             <span class="caption-year">2026</span>
@@ -292,7 +294,7 @@
         </div>
 
         <div class="gallery-item" data-date="2026-06-18" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/rebecca.webp" alt="Piece 2" loading="lazy" />
+          <img class="art-placeholder" src="images/rebecca.webp" alt="Rebecca" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Rebecca</span>
             <span class="caption-year">2026</span>
@@ -300,7 +302,7 @@
         </div>
 
         <div class="gallery-item" data-date="2025-12-29" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/Dex.webp" alt="Piece 3" loading="lazy" />
+          <img class="art-placeholder" src="images/Dex.webp" alt="Dex" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Dex(OC)</span>
             <span class="caption-year">2025</span>
@@ -308,7 +310,7 @@
         </div>
 
         <div class="gallery-item" data-date="2026-01-02" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/Neru.webp" alt="Piece 4" loading="lazy" />
+          <img class="art-placeholder" src="images/Neru.webp" alt="Akita Neru" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Akita Neru</span>
             <span class="caption-year">2026</span>
@@ -316,7 +318,7 @@
         </div>
 
         <div class="gallery-item" data-date="2026-06-27" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/mina.webp" alt="Piece 5" loading="lazy" />
+          <img class="art-placeholder" src="images/mina.webp" alt="Mina" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Mina (MHA)</span>
             <span class="caption-year">2026</span>
@@ -324,7 +326,7 @@
         </div>
 
         <div class="gallery-item" data-date="2026-04-09" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/cat.webp" alt="Piece 6" loading="lazy" />
+          <img class="art-placeholder" src="images/cat.webp" alt="Catalyst" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Catalyst</span>
             <span class="caption-year">2026</span>
@@ -332,7 +334,7 @@
         </div>
 
         <div class="gallery-item" data-date="2026-04-14" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/Raven.webp" alt="Piece 7" loading="lazy" />
+          <img class="art-placeholder" src="images/Raven.webp" alt="Raven" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Raven</span>
             <span class="caption-year">2026</span>
@@ -340,7 +342,7 @@
         </div>
 
         <div class="gallery-item" data-date="2026-06-10" onclick="openLightbox(this)">
-          <img class="art-placeholder" src="images/kiara.webp" alt="Piece 8" loading="lazy" />
+          <img class="art-placeholder" src="images/kiara.webp" alt="Kiara" loading="lazy" />
           <div class="gallery-caption">
             <span class="caption-title">Kiara JJK</span>
             <span class="caption-year">2026</span>
@@ -498,7 +500,54 @@
 
 <!-- ──────────────── FOOTER ──────────────── -->
 <footer>
-  <p>© 2026 Aza Studio — All artwork rights reserved.</p>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-brand-top">
+        <span class="footer-mark">A</span>
+        <span class="footer-wordmark">Aza<span class="footer-wordmark-accent">Studio</span></span>
+      </a>
+      <p class="footer-tagline">Character portraits, illustrations, and OC art. Commissions open — slots are limited.</p>
+      <a href="commission.html" class="btn btn-primary footer-cta">Start a commission <span class="btn-arrow">↗</span></a>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title footer-col-title-accent">Follow</p>
+      <div class="footer-follow-grid">
+        <a href="https://x.com/Aza19art" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">𝕏</span> Twitter
+        </a>
+        <a href="https://www.instagram.com/aza19art" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">IG</span> Instagram
+        </a>
+        <a href="https://www.deviantart.com/azzza19art" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">DA</span> DeviantArt
+        </a>
+        <a href="https://azza19art.newgrounds.com" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">NG</span> NewGrounds
+        </a>
+        <a href="https://rule34.xxx/index.php?page=post&s=list&tags=aza19" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">R34</span> Rule 34
+        </a>
+        <a href="https://www.redbubble.com/people/azzza19OG" target="_blank" rel="noopener" class="footer-link-pill">
+          <span class="footer-link-icon">RB</span> Redbubble
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title">Info</p>
+      <ul class="footer-info-list">
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="commission.html#terms">Terms</a></li>
+        <li><a href="commission.html#faq">FAQ</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Aza Studio</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <button type="button" class="footer-totop" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top ↑</button>
+  </div>
 </footer>
 
 <!-- ──────────────── BACK TO TOP ──────────────── -->
