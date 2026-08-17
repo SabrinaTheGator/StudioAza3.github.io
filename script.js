@@ -210,7 +210,8 @@ const TIER_DATA = {
   bust:  { price: { sketch: 10,   flat: 15,    rendered: 20 }, plus: false },
   waist: { price: { sketch: 12.5, flat: 18.75, rendered: 25 }, plus: false },
   thigh: { price: { sketch: 15,   flat: 22.5,  rendered: 30 }, plus: false },
-  full:  { price: { sketch: 25,   flat: 37.5,  rendered: 50 }, plus: true  }
+  full:  { price: { sketch: 25,   flat: 37.5,  rendered: 50 }, plus: true  },
+  chibi: { price: { sketch: 8,    flat: 12,    rendered: 16 }, plus: false }
 };
 
 /* Format a price for display — whole numbers show plain, anything with
